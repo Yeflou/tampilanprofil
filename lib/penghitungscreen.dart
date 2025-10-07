@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'profilescreen.dart';
 
-class penghitungscreen extends StatefulWidget {
-  const penghitungscreen({super.key});
+class PenghitungScreen extends StatefulWidget {
+  const PenghitungScreen({super.key});
 
   @override
-  State<penghitungscreen> createState() => _penghitungscreenState();
+  State<PenghitungScreen> createState() => _PenghitungScreenState();
 }
 
-class _penghitungscreenState extends State<penghitungscreen> {
+
+class _PenghitungScreenState extends State<PenghitungScreen> {
 int nilai = 0;
 
 menghitung(){
@@ -17,6 +19,10 @@ menghitung(){
   nilai = nilai + 1;
     print("INI NILAI $nilai");
   }
+
+pindahHalaman(){
+ Navigator.of(context).push(MaterialPageRoute(builder: (context) => profilescreen())); 
+}
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +36,9 @@ menghitung(){
             ElevatedButton(onPressed: (){
               menghitung();
             }, child: Text("Hitung"),),
+            TextButton(onPressed: (){
+              pindahHalaman();
+            }, child: Text("Pindah page"),)
           ],
         ),
       ),
