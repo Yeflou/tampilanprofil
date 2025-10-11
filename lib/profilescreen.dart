@@ -1,23 +1,37 @@
 import 'package:flutter/material.dart';
 
-class profilescreen extends StatelessWidget {
-  const profilescreen({super.key});
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 99, 242, 255),
+      backgroundColor: const Color.fromARGB(255, 251, 231, 251),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 6, 66, 196),
+        backgroundColor: const Color.fromARGB(255, 255, 171, 46),
         title: Text("Profile"),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-           Image.asset("assets/nyanko.jpg", 
-           height: 200,),
-          Text("Nama", style:TextStyle(fontSize: 30, color: const Color.fromARGB(255, 117, 103, 125)),),
-          Text("Alamat"),
+            CircleAvatar(
+              radius: 75, 
+                backgroundColor: Color.fromARGB(255, 255, 171, 46), 
+                  child: CircleAvatar(
+                    radius: 71, 
+                      backgroundImage: AssetImage("assets/nyanko.jpg"), 
+                ),
+              ),
+          Text(  "Amelia Flora Aprilianingrum", 
+            textAlign: TextAlign.center, 
+              style: TextStyle(
+                fontSize: 20, 
+                  fontWeight: FontWeight.bold, 
+                    color: Color.fromARGB(255, 0, 0, 0),
+              ),
+          ),
+
           Row(
           
             mainAxisAlignment: MainAxisAlignment.center,
@@ -29,22 +43,41 @@ class profilescreen extends StatelessWidget {
 
           ],),
           Card(
+            color: const Color.fromARGB(255, 255, 212, 121),
             child: ListTile(
-              leading: Icon( Icons.home),
-              title: Text("alamat"),
-              subtitle: Text("Arabasta"),
+              leading: Icon( Icons.person),
+              title: Text("Nama Lengkap"),
+              subtitle: Text("Amelia Flora Aprilianingrum"),
               trailing: Icon(Icons.arrow_circle_right),
             ),
           ),
           Card(
+            color: const Color.fromARGB(255, 255, 212, 121),
             child: ListTile(
-              leading: Icon( Icons.local_pizza),
-              title: Text("logout"),
-              subtitle: Text("Arabasta"),
+              leading: Icon( Icons.info),
+              title: Text("Tentang Saya"),
+              subtitle: Text("Saya adalah seorang mahasiswa Universitas Duta Bangsa Surakarta"),
               trailing: Icon(Icons.exit_to_app),
             ),
-          )
-          
+          ),
+          Card(
+            color: const Color.fromARGB(255, 255, 212, 121),
+            child: ListTile(
+              leading: Icon( Icons.phone),
+              title: Text("Telepon"),
+              subtitle: Text("082345678765"),
+              trailing: Icon(Icons.call),
+            ),
+        ),
+          Card(
+            color: const Color.fromARGB(255, 255, 212, 121),
+            child: ListTile(
+              leading: Icon( Icons.home),
+              title: Text("Alamat"),
+              subtitle: Text("Jln. Slamet Riyadi No. 1 Surakarta"),
+              trailing: Icon(Icons.map),
+            ),
+          ),
           ],
           ),
       ),

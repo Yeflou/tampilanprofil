@@ -21,13 +21,13 @@ menghitung(){
   }
 
 pindahHalaman(){
- Navigator.of(context).push(MaterialPageRoute(builder: (context) => profilescreen())); 
+ Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileScreen())); 
 }
 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      backgroundColor: Colors.cyanAccent,
+      backgroundColor: const Color.fromARGB(255, 75, 105, 105),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
