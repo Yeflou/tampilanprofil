@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  const ProfileScreen({super.key, this.username});
+  final String? username;
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +10,7 @@ class ProfileScreen extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 251, 231, 251),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 255, 171, 46),
-        title: Text("Profile Screen"),
+        title: Text("Profile Screen $username"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -39,6 +40,10 @@ class ProfileScreen extends StatelessWidget {
             Icon(Icons.favorite),
             Icon(Icons.favorite), 
             Icon(Icons.favorite),
+
+        TextButton(onPressed: () {
+          Navigator.pop(context);
+        }, child: Text("Back")),
 
 
           ],),
@@ -78,6 +83,34 @@ class ProfileScreen extends StatelessWidget {
               trailing: Icon(Icons.map),
             ),
           ),
+          Card(
+            color: const Color.fromARGB(255, 255, 212, 121),
+            child: ListTile(
+              leading: Icon( Icons.email),
+              title: Text("Email"),
+              subtitle: Text("amelflora06@gmail.com"),
+              trailing: Icon(Icons.send),
+            ),
+          ),
+          Card(
+            color: const Color.fromARGB(255, 255, 212, 121),
+            child: ListTile(
+              leading: Icon( Icons.school),
+              title: Text("Universitas"),
+              subtitle: Text("Universitas Duta Bangsa Surakarta"),
+              trailing: Icon(Icons.account_balance),
+            ),
+          ),
+          Card(
+            color: const Color.fromARGB(255, 255, 212, 121),
+            
+            child: ListTile(
+              leading: Icon( Icons.cake),
+              title: Text("Tanggal Lahir"),
+              subtitle: Text("6 April 2003"),
+              trailing: Icon(Icons.calendar_month),
+            ),
+          )
           ],
           ),
       ),

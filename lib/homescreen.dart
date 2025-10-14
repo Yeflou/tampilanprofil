@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'profilescreen.dart';      // Pastikan ada file ini
-import 'penghitungscreen.dart';  // Pastikan ada file ini
+import 'profilescreen.dart';      
+import 'penghitungscreen.dart'; 
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
