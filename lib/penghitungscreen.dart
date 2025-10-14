@@ -8,37 +8,52 @@ class PenghitungScreen extends StatefulWidget {
   State<PenghitungScreen> createState() => _PenghitungScreenState();
 }
 
-
 class _PenghitungScreenState extends State<PenghitungScreen> {
-int nilai = 0;
+  int nilai = 0;
 
-menghitung(){
-  setState(() {
-    
-  });
-  nilai = nilai + 1;
-    print("INI NILAI $nilai");
+  void menghitung() {
+    setState(() {
+      nilai++;
+    });
   }
 
-pindahHalaman(){
- Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileScreen())); 
-}
+  void pindahHalaman() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const ProfileScreen(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      backgroundColor: const Color.fromARGB(255, 75, 105, 105),
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 255, 212, 121),
+      appBar: AppBar(
+        title: const Text('Penghitung Screen'),
+        backgroundColor: const Color.fromARGB(255, 255, 171, 46),
+
+        // penting banget: biar tombol back muncul
+        automaticallyImplyLeading: true, 
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("hitung $nilai"),
-            ElevatedButton(onPressed: (){
-              menghitung();
-            }, child: Text("Hitung"),),
-            TextButton(onPressed: (){
-              pindahHalaman();
-            }, child: Text("Pindah page"),)
+            Text(
+              'Hitung: $nilai',
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: menghitung,
+              child: const Text('Tambah Hitungan'),
+            ),
+            const SizedBox(height: 10),
+            TextButton(
+              onPressed: pindahHalaman,
+              child: const Text('Pindah ke Halaman Profile'),
+            ),
           ],
         ),
       ),

@@ -9,7 +9,7 @@ class ProfileScreen extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 251, 231, 251),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 255, 171, 46),
-        title: Text("Profile"),
+        title: Text("Profile Screen"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
