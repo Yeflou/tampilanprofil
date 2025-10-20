@@ -13,12 +13,23 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child : Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 240, 248, 255), // Very light blue
+              Color.fromARGB(255, 220, 240, 255), // Light blue
+            ],
+          ),
+        ),
+        child: Center(
+          child : Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+            children: [
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -43,7 +54,8 @@ class _LoginScreenState extends State<LoginScreen> {
           );
           }, child: Text('Login')),
 
-          ],
+            ],
+            ),
           ),
         ),
       ),

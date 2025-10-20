@@ -66,16 +66,27 @@ class _EditProfilState extends State<EditProfil> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 251, 231, 251),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 255, 171, 46),
+        backgroundColor: Color(0xFF0046FF),
+        foregroundColor: Colors.white,
         title: Text("Edit Profil"),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: Form(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 240, 248, 255), // Very light blue
+              Color.fromARGB(255, 220, 240, 255), // Light blue
+            ],
+          ),
+        ),
+        child: Form(
         key: _formKey,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -87,7 +98,7 @@ class _EditProfilState extends State<EditProfil> {
                   children: [
                     CircleAvatar(
                       radius: 75,
-                      backgroundColor: Color.fromARGB(255, 255, 171, 46),
+                      backgroundColor: Color(0xFF0046FF),
                       child: CircleAvatar(
                         radius: 71,
                         backgroundImage: AssetImage("assets/nyanko.jpg"),
@@ -98,7 +109,7 @@ class _EditProfilState extends State<EditProfil> {
                       right: 0,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 255, 171, 46),
+                          color: Color(0xFF0046FF),
                           shape: BoxShape.circle,
                         ),
                         child: IconButton(
@@ -133,7 +144,7 @@ class _EditProfilState extends State<EditProfil> {
                 child: ElevatedButton(
                   onPressed: _saveProfile,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 171, 46),
+                    backgroundColor: Color(0xFF0046FF),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -147,6 +158,7 @@ class _EditProfilState extends State<EditProfil> {
               ),
             ],
           ),
+        ),
         ),
       ),
     );
@@ -162,44 +174,96 @@ class _EditProfilState extends State<EditProfil> {
     final keyboardType = field['type'] as TextInputType?;
     final readOnly = field['readOnly'] as bool? ?? false;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 255, 212, 121),
-        borderRadius: BorderRadius.circular(10),
+    return Card(
+      color: Colors.white,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+        side: BorderSide(
+          color: Colors.grey.shade300,
+          width: 1,
+        ),
       ),
-      child: TextFormField(
-        controller: controller,
-        maxLines: maxLines,
-        keyboardType: keyboardType,
-        readOnly: readOnly,
-        onTap: readOnly ? () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Fitur date picker belum tersedia")),
-          );
-        } : null,
-        validator: required ? (value) {
-          if (value == null || value.isEmpty) {
-            return '$label harus diisi';
-          }
-          if (key == 'email' && !value.contains('@')) {
-            return 'Format email tidak valid';
-          }
-          if (key == 'telepon' && value.length < 10) {
-            return 'Nomor telepon minimal 10 digit';
-          }
-          return null;
-        } : null,
-        decoration: InputDecoration(
-          labelText: label,
-          prefixIcon: Icon(icon, color: Colors.black87),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide.none,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border(
+            bottom: BorderSide(color: Colors.grey.shade400, width: 1),
+            right: BorderSide(color: Colors.grey.shade400, width: 1),
           ),
-          filled: true,
-          fillColor: Colors.transparent,
-          labelStyle: TextStyle(color: Colors.black87, fontWeight: FontWeight.w500),
-          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(icon, color: Color(0xFF0046FF), size: 20),
+                  SizedBox(width: 8),
+                  Text(
+                    label,
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8),
+              TextFormField(
+                controller: controller,
+                maxLines: maxLines,
+                keyboardType: keyboardType,
+                readOnly: readOnly,
+                onTap: readOnly ? () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Fitur date picker belum tersedia")),
+                  );
+                } : null,
+                validator: required ? (value) {
+                  if (value == null || value.isEmpty) {
+                    return '$label harus diisi';
+                  }
+                  if (key == 'email' && !value.contains('@')) {
+                    return 'Format email tidak valid';
+                  }
+                  if (key == 'telepon' && value.length < 10) {
+                    return 'Nomor telepon minimal 10 digit';
+                  }
+                  return null;
+                } : null,
+                style: TextStyle(fontSize: 16),
+                decoration: InputDecoration(
+                  hintText: 'Masukkan $label',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(color: Colors.grey.shade300),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(color: Colors.grey.shade300),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(color: Color(0xFF0046FF), width: 2),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(color: Colors.red),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(color: Colors.red, width: 2),
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey.shade50,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

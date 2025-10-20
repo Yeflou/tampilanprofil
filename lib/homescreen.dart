@@ -10,94 +10,173 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home Screen'),
-        backgroundColor: const Color.fromARGB(255, 255, 212, 121),
+        backgroundColor: Color(0xFF0046FF),// Light blue
+        foregroundColor: Colors.white,
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'Pilih Halaman:',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(255, 240, 248, 255), // Very light blue
+                  Color.fromARGB(255, 220, 240, 255), // Light blue
+                ],
               ),
-              const SizedBox(height: 30),
-
-              //  CARD 1: TOMBOL PROFIL
-              Card(
-                color: const Color.fromARGB(255, 255, 241, 190),
-                elevation: 6, // efek bayangan
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: ElevatedButton.icon(
-                    icon: const Icon(Icons.person),
-                    label: const Text(
-                      'Buka Profil',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 255, 171, 46),
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 14),
-                      elevation: 3,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const ProfileScreen(),
-                        ),
-                      );
-                    },
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Icon(
+                    Icons.home,
+                    size: 80,
+                    color: Color.fromARGB(255, 100, 149, 237), // Cornflower blue
                   ),
-                ),
-              ),
-
-              const SizedBox(height: 20),
-
-              //  CARD 2: TOMBOL PENGHITUNG
-              Card(
-                color: const Color.fromARGB(255, 255, 241, 190),
-                elevation: 6,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: ElevatedButton.icon(
-                    icon: const Icon(Icons.calculate),
-                    label: const Text(
-                      'Buka Penghitung',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Selamat Datang!',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 70, 130, 180), // Steel blue
                     ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 255, 171, 46),
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 14),
-                      elevation: 3,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const PenghitungScreen(),
-                        ),
-                      );
-                    },
                   ),
-                ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Pilih menu di bawah untuk melanjutkan',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Color.fromARGB(255, 100, 149, 237),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+          // Floating Navigation Bar
+          Positioned(
+            left: 20,
+            right: 20,
+            bottom: 20,
+            child: Container(
+              height: 60,
+              decoration: BoxDecoration(
+                color: Color(0xFF0046FF),
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 15,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Menu Home (Active)
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 4,
+                          height: 4,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Icon(
+                          Icons.home,
+                          size: 20,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(height: 2),
+                        const Text(
+                          'Home',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Menu Profil
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const ProfileScreen(),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const SizedBox(height: 4),
+                          Icon(
+                            Icons.person,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                          const SizedBox(height: 2),
+                          const Text(
+                            'Profil',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  // Menu Penghitung
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const PenghitungScreen(),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const SizedBox(height: 4),
+                          Icon(
+                            Icons.calculate,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                          const SizedBox(height: 2),
+                          const Text(
+                            'Hitung',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

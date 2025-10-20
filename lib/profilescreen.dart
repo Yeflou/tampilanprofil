@@ -30,18 +30,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 251, 231, 251),
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 255, 171, 46),
-        title: Text("Profile Screen ${widget.username}"),
+       appBar: AppBar(
+        title: const Text('Profile Screen'),
+        backgroundColor: Color(0xFF0046FF),// Light blue
+        foregroundColor: Colors.white,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 240, 248, 255), // Very light blue
+              Color.fromARGB(255, 220, 240, 255), // Light blue
+            ],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ListView(
           children: [
             CircleAvatar(
               radius: 75, 
-                backgroundColor: Color.fromARGB(255, 255, 171, 46), 
+                backgroundColor: Color(0xFF0046FF),
                   child: CircleAvatar(
                     radius: 71, 
                       backgroundImage: AssetImage("assets/nyanko.jpg"), 
@@ -71,67 +82,179 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
           ],),
           Card(
-            color: const Color.fromARGB(255, 255, 212, 121),
-            child: ListTile(
-              leading: Icon( Icons.person),
-              title: Text("Nama Lengkap"),
-              subtitle: Text(_profileData['nama']!),
-              trailing: Icon(Icons.arrow_circle_right),
+            color: Colors.white,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+              side: BorderSide(
+                color: Colors.grey.shade300,
+                width: 1,
+              ),
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border(
+                  bottom: BorderSide(color: Colors.grey.shade400, width: 1),
+                  right: BorderSide(color: Colors.grey.shade400, width: 1),
+                ),
+              ),
+              child: ListTile(
+                leading: Icon(Icons.person, color: Color(0xFF0046FF)),
+                title: Text("Nama Lengkap", style: TextStyle(fontWeight: FontWeight.w600)),
+                subtitle: Text(_profileData['nama']!),
+              ),
             ),
           ),
           Card(
-            color: const Color.fromARGB(255, 255, 212, 121),
-            child: ListTile(
-              leading: Icon( Icons.info),
-              title: Text("Tentang Saya"),
-              subtitle: Text(_profileData['tentang']!),
-              trailing: Icon(Icons.exit_to_app),
+            color: Colors.white,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+              side: BorderSide(
+                color: Colors.grey.shade300,
+                width: 1,
+              ),
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border(
+                  bottom: BorderSide(color: Colors.grey.shade400, width: 1),
+                  right: BorderSide(color: Colors.grey.shade400, width: 1),
+                ),
+              ),
+              child: ListTile(
+                leading: Icon(Icons.info, color: Color(0xFF0046FF)),
+                title: Text("Tentang Saya", style: TextStyle(fontWeight: FontWeight.w600)),
+                subtitle: Text(_profileData['tentang']!),
+              ),
             ),
           ),
           Card(
-            color: const Color.fromARGB(255, 255, 212, 121),
-            child: ListTile(
-              leading: Icon( Icons.phone),
-              title: Text("Telepon"),
-              subtitle: Text(_profileData['telepon']!),
-              trailing: Icon(Icons.call),
+            color: Colors.white,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+              side: BorderSide(
+                color: Colors.grey.shade300,
+                width: 1,
+              ),
             ),
-        ),
-          Card(
-            color: const Color.fromARGB(255, 255, 212, 121),
-            child: ListTile(
-              leading: Icon( Icons.home),
-              title: Text("Alamat"),
-              subtitle: Text(_profileData['alamat']!),
-              trailing: Icon(Icons.map),
-            ),
-          ),
-          Card(
-            color: const Color.fromARGB(255, 255, 212, 121),
-            child: ListTile(
-              leading: Icon( Icons.email),
-              title: Text("Email"),
-              subtitle: Text(_profileData['email']!),
-              trailing: Icon(Icons.send),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border(
+                  bottom: BorderSide(color: Colors.grey.shade400, width: 1),
+                  right: BorderSide(color: Colors.grey.shade400, width: 1),
+                ),
+              ),
+              child: ListTile(
+                leading: Icon(Icons.phone, color: Color(0xFF0046FF)),
+                title: Text("Telepon", style: TextStyle(fontWeight: FontWeight.w600)),
+                subtitle: Text(_profileData['telepon']!),
+              ),
             ),
           ),
           Card(
-            color: const Color.fromARGB(255, 255, 212, 121),
-            child: ListTile(
-              leading: Icon( Icons.school),
-              title: Text("Universitas"),
-              subtitle: Text(_profileData['universitas']!),
-              trailing: Icon(Icons.account_balance),
+            color: Colors.white,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+              side: BorderSide(
+                color: Colors.grey.shade300,
+                width: 1,
+              ),
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border(
+                  bottom: BorderSide(color: Colors.grey.shade400, width: 1),
+                  right: BorderSide(color: Colors.grey.shade400, width: 1),
+                ),
+              ),
+              child: ListTile(
+                leading: Icon(Icons.home, color: Color(0xFF0046FF)),
+                title: Text("Alamat", style: TextStyle(fontWeight: FontWeight.w600)),
+                subtitle: Text(_profileData['alamat']!),
+
+              ),
             ),
           ),
           Card(
-            color: const Color.fromARGB(255, 255, 212, 121),
-            
-            child: ListTile(
-              leading: Icon( Icons.cake),
-              title: Text("Tanggal Lahir"),
-              subtitle: Text(_profileData['tanggal']!),
-              trailing: Icon(Icons.calendar_month),
+            color: Colors.white,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+              side: BorderSide(
+                color: Colors.grey.shade300,
+                width: 1,
+              ),
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border(
+                  bottom: BorderSide(color: Colors.grey.shade400, width: 1),
+                  right: BorderSide(color: Colors.grey.shade400, width: 1),
+                ),
+              ),
+              child: ListTile(
+                leading: Icon(Icons.email, color: Color(0xFF0046FF)),
+                title: Text("Email", style: TextStyle(fontWeight: FontWeight.w600)),
+                subtitle: Text(_profileData['email']!),
+                 ),
+            ),
+          ),
+          Card(
+            color: Colors.white,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+              side: BorderSide(
+                color: Colors.grey.shade300,
+                width: 1,
+              ),
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border(
+                  bottom: BorderSide(color: Colors.grey.shade400, width: 1),
+                  right: BorderSide(color: Colors.grey.shade400, width: 1),
+                ),
+              ),
+              child: ListTile(
+                leading: Icon(Icons.school, color: Color(0xFF0046FF)),
+                title: Text("Universitas", style: TextStyle(fontWeight: FontWeight.w600)),
+                subtitle: Text(_profileData['universitas']!),
+                ),
+            ),
+          ),
+          Card(
+            color: Colors.white,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+              side: BorderSide(
+                color: Colors.grey.shade300,
+                width: 1,
+              ),
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border(
+                  bottom: BorderSide(color: Colors.grey.shade400, width: 1),
+                  right: BorderSide(color: Colors.grey.shade400, width: 1),
+                ),
+              ),
+              child: ListTile(
+                leading: Icon(Icons.cake, color: Color(0xFF0046FF)),
+                title: Text("Tanggal Lahir", style: TextStyle(fontWeight: FontWeight.w600)),
+                subtitle: Text(_profileData['tanggal']!),
+                ),
             ),
           ),
           SizedBox(height: 20),
@@ -162,7 +285,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 255, 171, 46),
+                backgroundColor: Color(0xFF0046FF),
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -172,6 +295,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           ],
           ),
+        ),
       ),
     );
   }
