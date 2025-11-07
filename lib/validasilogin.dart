@@ -17,7 +17,7 @@ class _ValidasiLoginState extends State<ValidasiLogin> {
     if (_formKey.currentState!.validate()) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const LoginScreen(),
+          builder: (context) => const HomeScreen(),
         ),
       );
     }
