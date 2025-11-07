@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class EditProfil extends StatefulWidget {
   const EditProfil({
@@ -8,7 +10,7 @@ class EditProfil extends StatefulWidget {
   });
 
   final Map<String, String> initialData;
-  final Function(Map<String, String>) onSave;
+  final Function(Map<String, String>, {File? profileImage}) onSave;
 
   @override
   State<EditProfil> createState() => _EditProfilState();
@@ -16,6 +18,9 @@ class EditProfil extends StatefulWidget {
 
 class _EditProfilState extends State<EditProfil> {
   final _formKey = GlobalKey<FormState>();
+  final ImagePicker _picker = ImagePicker();
+  File? _selectedImage;
+  
   late final _controllers = {
     'nama': TextEditingController(text: widget.initialData['nama']),
     'tentang': TextEditingController(text: widget.initialData['tentang']),
@@ -32,6 +37,99 @@ class _EditProfilState extends State<EditProfil> {
     super.dispose();
   }
 
+  Future<void> _pickImage(ImageSource source) async {
+    try {
+      final XFile? image = await _picker.pickImage(
+        source: source,
+        maxWidth: 300,
+        maxHeight: 300,
+        imageQuality: 80,
+      );
+      
+      if (image != null) {
+        setState(() {
+          _selectedImage = File(image.path);
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Foto berhasil dipilih!"),
+            backgroundColor: Colors.green,
+          ),
+        );
+      }
+    } catch (e) {
+      print("Error picking image: $e");
+      String errorMessage = "Error mengambil gambar";
+      
+      if (e.toString().contains("Permission denied")) {
+        errorMessage = "Permission ditolak. Silakan berikan permission untuk mengakses ${source == ImageSource.camera ? 'kamera' : 'galeri'} di pengaturan aplikasi.";
+      } else if (e.toString().contains("No image selected")) {
+        errorMessage = "Tidak ada gambar yang dipilih.";
+      } else {
+        errorMessage = "Error: ${e.toString()}";
+      }
+      
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(errorMessage),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 5),
+        ),
+      );
+    }
+  }
+
+  void _showImagePicker() {
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (BuildContext context) {
+        return SafeArea(
+          child: Container(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Pilih Foto Profil',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 20),
+                ListTile(
+                  leading: Icon(Icons.camera_alt, color: Color(0xFF0046FF)),
+                  title: Text('Ambil dari Kamera'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _pickImage(ImageSource.camera);
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.photo_library, color: Color(0xFF0046FF)),
+                  title: Text('Pilih dari Galeri'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _pickImage(ImageSource.gallery);
+                  },
+                ),
+                SizedBox(height: 10),
+                ListTile(
+                  leading: Icon(Icons.cancel, color: Colors.red),
+                  title: Text('Batal'),
+                  onTap: () => Navigator.pop(context),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   void _saveProfile() {
     if (_formKey.currentState!.validate()) {
       // Kumpulkan data yang telah diubah
@@ -41,7 +139,7 @@ class _EditProfilState extends State<EditProfil> {
       });
       
       // Panggil callback untuk mengupdate data di ProfileScreen
-      widget.onSave(updatedData);
+      widget.onSave(updatedData, profileImage: _selectedImage);
       
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -101,7 +199,9 @@ class _EditProfilState extends State<EditProfil> {
                       backgroundColor: Color(0xFF0046FF),
                       child: CircleAvatar(
                         radius: 71,
-                        backgroundImage: AssetImage("assets/nyanko.jpg"),
+                        backgroundImage: _selectedImage != null 
+                          ? FileImage(_selectedImage!)
+                          : AssetImage("assets/nyanko.jpg") as ImageProvider,
                       ),
                     ),
                     Positioned(
@@ -114,11 +214,7 @@ class _EditProfilState extends State<EditProfil> {
                         ),
                         child: IconButton(
                           icon: Icon(Icons.camera_alt, color: Colors.white),
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Fitur ganti foto belum tersedia")),
-                            );
-                          },
+                          onPressed: _showImagePicker,
                         ),
                       ),
                     ),

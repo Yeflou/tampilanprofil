@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'editprofil.dart';
+import 'dart:io';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key, this.username});
@@ -20,10 +21,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     'universitas': 'Universitas Duta Bangsa Surakarta',
     'tanggal': '6 April 2003',
   };
+  
+  File? _profileImage;
 
-  void _updateProfile(Map<String, String> newData) {
+  void _updateProfile(Map<String, String> newData, {File? profileImage}) {
     setState(() {
       _profileData = newData;
+      if (profileImage != null) {
+        _profileImage = profileImage;
+      }
     });
   }
 
@@ -55,7 +61,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 backgroundColor: Color(0xFF0046FF),
                   child: CircleAvatar(
                     radius: 71, 
-                      backgroundImage: AssetImage("assets/nyanko.jpg"), 
+                      backgroundImage: _profileImage != null 
+                        ? FileImage(_profileImage!)
+                        : AssetImage("assets/nyanko.jpg") as ImageProvider,
                 ),
               ),
           Text(  _profileData['nama']!, 
